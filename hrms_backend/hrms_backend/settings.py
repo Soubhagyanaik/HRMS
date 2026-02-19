@@ -30,11 +30,7 @@ SECRET_KEY = 'django-insecure-gls^*l_*fgnj*2-ey87y!ikb2xx43rxs=+%2o2z-u(93w7#m0i
 
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    'hrms-new-4.onrender.com',  # aapka remote server
-]
+ALLOWED_HOSTS = ['*']
 
 
 
@@ -52,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'employees',
     'attendance',
+    'corsheaders', #try
 ]
 
 
@@ -64,7 +61,7 @@ REST_FRAMEWORK = {
 
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

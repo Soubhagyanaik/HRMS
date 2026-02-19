@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Api } from '../services/api';
@@ -10,8 +10,7 @@ import { Api } from '../services/api';
   templateUrl: './attendance.html',
   styleUrls: ['./attendance.css']
 })
-export class AttendanceComponent implements OnInit {
-
+export class AttendanceComponent {
   employees: any[] = [];
   attendanceRecords: any[] = [];
   newAttendance = { employee: 0, status: 'Present' };
@@ -19,37 +18,16 @@ export class AttendanceComponent implements OnInit {
 
   constructor(private api: Api) {}
 
-  ngOnInit() {
-    this.loadEmployees();
-    this.loadAttendance();
-  }
+  ngOnInit() { this.loadEmployees(); this.loadAttendance(); }
 
-  loadEmployees() {
-    this.api.getEmployees().subscribe({
-      next: (data: any[]) => this.employees = data,
-      error: () => this.error = 'Failed to load employees'
-    });
-  }
-
-  loadAttendance() {
-    this.api.getAttendance().subscribe({
-      next: (data: any[]) => this.attendanceRecords = data,
-      error: () => this.error = 'Failed to load attendance'
-    });
-  }
+  loadEmployees() { this.api.getEmployees().subscribe({ next: data => this.employees = data, error: () => this.error='Failed to load employees' }); }
+  loadAttendance() { this.api.getAttendance().subscribe({ next: data => this.attendanceRecords = data, error: () => this.error='Failed to load attendance' }); }
 
   addAttendance() {
-    if (!this.newAttendance.employee) {
-      this.error = 'Select employee';
-      return;
-    }
-
+    if (!this.newAttendance.employee) { this.error='Select employee'; return; }
     this.api.addAttendance(this.newAttendance).subscribe({
-      next: () => {
-        this.newAttendance = { employee: 0, status: 'Present' };
-        this.loadAttendance();
-      },
-      error: () => this.error = 'Failed to add attendance'
+      next: () => { this.newAttendance = { employee:0, status:'Present' }; this.loadAttendance(); },
+      error: () => this.error='Failed to add attendance'
     });
   }
 }
