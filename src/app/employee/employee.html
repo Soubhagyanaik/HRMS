@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Employees</h2>
+
+  <div *ngIf="error" class="error">{{error}}</div>
+  <div *ngIf="loading">Loading employees...</div>
+
+  <div class="form">
+    <input type="text" placeholder="Employee ID" [(ngModel)]="newEmployee.employee_id">
+    <input type="text" placeholder="Full Name" [(ngModel)]="newEmployee.full_name">
+    <input type="email" placeholder="Email" [(ngModel)]="newEmployee.email">
+    <input type="text" placeholder="Department" [(ngModel)]="newEmployee.department">
+    <button (click)="addEmployee()">Add Employee</button>
+  </div>
+
+  <table *ngIf="employees.length > 0">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Action</th>
+    </tr>
+    <tr *ngFor="let emp of employees">
+      <td>{{emp.employee_id}}</td>
+      <td>{{emp.full_name}}</td>
+      <td>{{emp.email}}</td>
+      <td>{{emp.department}}</td>
+      <td><button (click)="deleteEmployee(emp.id)">Delete</button></td>
+    </tr>
+  </table>
+
+  <div *ngIf="employees.length == 0 && !loading">No employees found</div>
+</div>
