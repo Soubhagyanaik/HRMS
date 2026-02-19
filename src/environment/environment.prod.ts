@@ -5,5 +5,5 @@
 
 export const environment = {
   production: true,
-  apiUrl: 'https://hrms-new-4.onrender.com'
+  apiUrl: 'https://hrms-new-4.onrender.com/api'
 };
