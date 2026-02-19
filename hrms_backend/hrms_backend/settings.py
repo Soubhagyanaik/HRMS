@@ -138,3 +138,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+CORS_ALLOWED_ORIGINS = [
+    "https://hrms123-7kbpuk7qk-soubhagyas-projects-7ae48db3.vercel.app",
+]
+
