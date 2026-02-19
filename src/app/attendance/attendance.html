@@ -1,14 +1,14 @@
 <div class="container">
   <h2>Attendance</h2>
 
-  <div *ngIf="error" class="error">{{error}}</div>
-  <div *ngIf="loading">Loading...</div>
+  <!-- Error message -->
+  <div class="error" *ngIf="error">{{ error }}</div>
 
-   <!-- Add Attendance Form -->
+  <!-- Form -->
   <div class="form">
     <select [(ngModel)]="newAttendance.employee">
-      <option value="" disabled>Select Employee</option>
-      <option *ngFor="let emp of employees" [value]="emp.id">{{emp.full_name}}</option>
+      <option value="0">Select Employee</option>
+      <option *ngFor="let emp of employees" [value]="emp.id">{{ emp.full_name }}</option>
     </select>
 
     <select [(ngModel)]="newAttendance.status">
@@ -17,7 +17,7 @@
     </select>
 
     <button (click)="addAttendance()">Mark Attendance</button>
-  </div> 
+  </div>
 
   <!-- Attendance Table -->
   <table *ngIf="attendanceRecords.length > 0">
@@ -26,12 +26,12 @@
       <th>Date</th>
       <th>Status</th>
     </tr>
-    <tr *ngFor="let record of attendanceRecords">
-      <td>{{record.employee}}</td>
-      <td>{{record.date | date}}</td>
-      <td>{{record.status}}</td>
+    <tr *ngFor="let att of attendanceRecords">
+      <td>{{ att.employee_full_name }}</td>
+      <td>{{ att.date }}</td>
+      <td>{{ att.status }}</td>
     </tr>
   </table>
 
-  <div *ngIf="attendanceRecords.length == 0 && !loading">No records found</div> 
+  <div *ngIf="attendanceRecords.length === 0">No records found</div>
 </div>

@@ -1,27 +1,25 @@
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { Api } from '../services/api';
 
 @Component({
   selector: 'app-attendance',
-  imports: [RouterModule,CommonModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './attendance.html',
-  styleUrl: './attendance.css',
-  standalone: true
+  styleUrls: ['./attendance.css']
 })
-export class Attendance {
-     employees: any[] = [];
-  attendanceRecords: any[] = [];
-  loading = false;
-  error = '';
+export class AttendanceComponent implements OnInit {
 
-  newAttendance = { employee:'', status:'Present' };
+  employees: any[] = [];
+  attendanceRecords: any[] = [];
+  newAttendance = { employee: 0, status: 'Present' };
+  error = '';
 
   constructor(private api: Api) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadEmployees();
     this.loadAttendance();
   }
@@ -29,27 +27,29 @@ export class Attendance {
   loadEmployees() {
     this.api.getEmployees().subscribe({
       next: (data: any[]) => this.employees = data,
-      error: (err: any) => this.error = "Failed to load employees"
+      error: () => this.error = 'Failed to load employees'
     });
   }
 
   loadAttendance() {
-    this.loading = true;
     this.api.getAttendance().subscribe({
-      next: (data: any[]) => { this.attendanceRecords = data; this.loading = false; },
-      error: (err: any) => { this.error = "Failed to load attendance"; this.loading = false; }
+      next: (data: any[]) => this.attendanceRecords = data,
+      error: () => this.error = 'Failed to load attendance'
     });
   }
 
   addAttendance() {
-    if (!this.newAttendance.employee) { this.error = "Select employee"; return; }
+    if (!this.newAttendance.employee) {
+      this.error = 'Select employee';
+      return;
+    }
+
     this.api.addAttendance(this.newAttendance).subscribe({
-      next: (res: any) => {
-        alert("Attendance marked successfully!");
-        this.newAttendance = { employee:'', status:'Present' };
+      next: () => {
+        this.newAttendance = { employee: 0, status: 'Present' };
         this.loadAttendance();
       },
-      error: (err: any) => { this.error = "Failed to add attendance"; }
+      error: () => this.error = 'Failed to add attendance'
     });
   }
 }

@@ -8,11 +8,3 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.full_name
-
-class Attendance(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    date = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=10, choices=[('Present','Present'), ('Absent','Absent')])
-
-    def __str__(self):
-        return f"{self.employee.full_name} - {self.date} - {self.status}"

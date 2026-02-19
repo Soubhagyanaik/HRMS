@@ -26,14 +26,6 @@
   text-align: center;
 }
 
-/* Loading text */
-.container div[ng-reflect-ng-if="loading"] {
-  text-align: center;
-  font-weight: bold;
-  color: #007bff;
-  margin-bottom: 15px;
-}
-
 /* Form */
 .form {
   display: flex;
@@ -53,7 +45,7 @@
 
 .form button {
   padding: 8px 15px;
-  background-color: #28a745;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -62,7 +54,7 @@
 }
 
 .form button:hover {
-  background-color: #218838;
+  background-color: #007bff;
 }
 
 /* Table */
@@ -100,7 +92,7 @@ tr:nth-child(even) {
   .form {
     flex-direction: column;
   }
-  
+
   .form select,
   .form button {
     width: 100%;
