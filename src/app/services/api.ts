@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environment/environment.prod';
+import { environment } from '../../environments/environment';
 
-@Injectable({ providedIn: 'root' })
+
+
+
+@Injectable({
+  providedIn: 'root'
+})
 export class Api {
 
   baseUrl = environment.apiUrl;
